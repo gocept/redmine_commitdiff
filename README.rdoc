@@ -1,0 +1,12 @@
+= commitdiff
+
+Sends an email with the diff of the changeset to a configurable email address.
+(Similar to things like http://opensource.perlig.de/svnmailer/ that you'd put
+into your post-commit hooks)
+
+== Installation
+
+cd $REDMINE_HOME/vendor/plugins
+hg clone https://code.gocept.com/hg/public/redmine_commitdiff
+rake db:migrate:plugins
+

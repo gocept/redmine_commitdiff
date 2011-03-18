@@ -1,4 +1,8 @@
+# Copyright (c) 2011 gocept gmbh & co. kg
+# See also LICENSE.txt
+
 require 'redmine'
+
 
 Redmine::Plugin.register :redmine_commitdiff do
   name 'Redmine Commitdiff plugin'

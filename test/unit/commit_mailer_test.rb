@@ -3,6 +3,9 @@
 
 require File.expand_path(File.dirname(__FILE__) + '/../test_helper')
 
+# note to self: run test with
+# rake test:plugins:units PLUGIN=redmine_commitdiff
+
 
 class CommitMailerTest < ActionMailer::TestCase
   test "diff" do

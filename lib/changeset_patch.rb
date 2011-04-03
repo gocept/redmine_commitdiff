@@ -38,6 +38,11 @@ module ChangesetPatch
         repository.diff(nil, revision, nil)
       end
     end
+
+    def branch
+      # XXX seems to never return anything useful
+      repository.scm.revisions(nil, revision).first.branch or '(unknown)'
+    end
   end
 end
 

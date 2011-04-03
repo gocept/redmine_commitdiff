@@ -1,0 +1,29 @@
+eCookbook commit:484cd8edca90
+
+Multiple changes
+
+* edit foo
+* edit binary gtimelog.png
+* remove bar
+* add qux
+
+
+diff -r 484cd8edca90 -r fdea7fdf41a9 bar
+--- /dev/null
++++ b/bar
+@@ -0,0 +1,1 @@
++other stuff
+diff -r 484cd8edca90 -r fdea7fdf41a9 foo
+--- a/foo
++++ b/foo
+@@ -1,2 +1,1 @@
+ Some text
+-more lines here
+diff -r 484cd8edca90 -r fdea7fdf41a9 gtimelog.png
+Binary file gtimelog.png has changed
+diff -r 484cd8edca90 -r fdea7fdf41a9 qux
+--- a/qux
++++ /dev/null
+@@ -1,1 +0,0 @@
+-third time
+

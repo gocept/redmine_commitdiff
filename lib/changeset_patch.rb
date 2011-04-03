@@ -32,7 +32,11 @@ module ChangesetPatch
     end
 
     def diff
-      repository.diff('', previous.revision, revision)
+      if previous
+        repository.diff(nil, previous.revision, revision)
+     else
+        repository.diff(nil, revision, nil)
+      end
     end
   end
 end

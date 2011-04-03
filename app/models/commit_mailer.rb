@@ -3,13 +3,13 @@
 
 class CommitMailer < ActionMailer::Base
 
-  def diff(sent_at = Time.now)
-    subject    'CommitMailer#diff'
-    recipients ''
-    from       ''
-    sent_on    sent_at
-
-    body       :greeting => 'Hi,'
+  def diff(changeset)
+    subject "#{changeset.project.name} - #{changeset.short_comments}"
+    recipients 'XXX'
+    sent_on changeset.committed_on
+    from changeset.committer
+    content_type 'text/x-diff'
+    body :cs => changeset
   end
 
 end

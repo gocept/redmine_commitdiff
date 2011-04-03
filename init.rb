@@ -2,6 +2,7 @@
 # See also LICENSE.txt
 
 require 'redmine'
+require_dependency 'changeset_patch'
 
 
 Redmine::Plugin.register :redmine_commitdiff do

@@ -1,3 +1,6 @@
+# Copyright (c) 2011 gocept gmbh & co. kg
+# See also LICENSE.txt
+
 require_dependency 'changeset'
 
 
@@ -6,9 +9,28 @@ require_dependency 'changeset'
 module ChangesetPatch
   def self.included(base)
     base.send(:include, InstanceMethods)
+
+    base.class_eval do
+      after_create :send_diff
+    end
   end
 
   module InstanceMethods
+    def send_diff
+      to = send_diff_recipient
+      CommitMailer.deliver_diff(self, to) unless to.blank?
+    end
+
+    def send_diff_recipient
+      project = self.project
+      while project
+        value = project.custom_value_for(
+          CustomField.find_by_name('Send Diff Emails To'))
+        return value.to_s if value
+        project = project.parent
+      end
+    end
+
     def diff
       repository.diff('', previous.revision, revision)
     end

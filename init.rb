@@ -22,3 +22,7 @@ unless ProjectCustomField.find_by_name('Send Diff Emails To')
     :default_value => ''
   )
 end
+
+
+# note to self: run test with
+# rake test:plugins:units PLUGIN=redmine_commitdiff

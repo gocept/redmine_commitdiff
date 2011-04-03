@@ -8,7 +8,6 @@ class CommitMailer < ActionMailer::Base
     recipients to
     sent_on changeset.committed_on
     from changeset.committer
-    content_type 'text/x-diff'
     body :cs => changeset
   end
 

@@ -3,9 +3,9 @@
 
 class CommitMailer < ActionMailer::Base
 
-  def diff(changeset, to)
+  def diff(changeset)
     subject "#{changeset.project.name} - #{changeset.short_comments}"
-    recipients to
+    recipients changeset.recipients
     sent_on changeset.committed_on
     from changeset.committer
     body :cs => changeset

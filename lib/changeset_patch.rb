@@ -17,18 +17,17 @@ module ChangesetPatch
 
   module InstanceMethods
     def send_diff
-      to = send_diff_recipient
-      CommitMailer.deliver_diff(self, to) unless to.blank?
+      CommitMailer.deliver_diff(self)
     end
 
-    def send_diff_recipient
-      project = self.project
-      while project
-        value = project.custom_value_for(
-          CustomField.find_by_name('Send Diff Emails To'))
-        return value.to_s if value
-        project = project.parent
-      end
+    def recipients
+      notified = project.notified_users
+      notified.reject! {|user| !visible?(user)}
+      notified.collect(&:mail)
+    end
+
+    def visible?(user=nil)
+      (user || User.current).allowed_to?(:view_issues, self.project)
     end
 
     def diff

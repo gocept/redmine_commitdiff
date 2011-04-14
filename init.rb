@@ -13,16 +13,5 @@ Redmine::Plugin.register :redmine_commitdiff do
 end
 
 
-unless ProjectCustomField.find_by_name('Send Diff Emails To')
-  ProjectCustomField.create(
-    :name => 'Send Diff Emails To',
-    :is_for_all => false,
-    :field_format => 'string',
-    :is_required => false,
-    :default_value => ''
-  )
-end
-
-
 # note to self: run test with
 # rake test:plugins:units PLUGIN=redmine_commitdiff

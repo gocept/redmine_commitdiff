@@ -36,11 +36,10 @@ class CommitMailerTest < ActionMailer::TestCase
 
     @expected.date = cs.committed_on
     @expected.from = cs.committer
-    @expected.to = 'nobody@localhost'
     @expected.subject = 'eCookbook - Multiple changes'
     @expected.body = read_fixture('basic_email')
 
-    @actual = CommitMailer.create_diff(cs, 'nobody@localhost')
+    @actual = CommitMailer.create_diff(cs)
     assert_equal(
       normalize_revisions(@expected.encoded),
       normalize_revisions(@actual.encoded))

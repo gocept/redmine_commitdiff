@@ -28,7 +28,17 @@ class CommitMailerTest < ActionMailer::TestCase
   end
 
   def normalize_revisions(text)
-    text.gsub(/\b[a-f0-9]{12}\b/, 'REV')
+    text.gsub!(/\b[a-f0-9]{12}\b/, 'REV')
+  end
+
+  def normalize_id(text)
+    text.gsub!(/(X-Redmine-Changeset-Id: )[0-9]+/, '\\1ID')
+  end
+
+  def normalize(text)
+    normalize_revisions(text)
+    normalize_id(text)
+    text
   end
 
   def test_basic_email_format
@@ -38,11 +48,16 @@ class CommitMailerTest < ActionMailer::TestCase
     @expected.from = cs.committer
     @expected.subject = 'eCookbook - Multiple changes'
     @expected.body = read_fixture('basic_email')
+    @expected['X-Redmine-Project'] = 'ecookbook'
+    @expected['X-Redmine-Changeset-Id'] = '42'
+    @expected['X-Mailer'] = 'Redmine'
+    @expected['X-Redmine-Host'] = Setting.host_name
+    @expected['X-Redmine-Site'] = Setting.app_title
+    @expected['Precedence'] = 'bulk'
+    @expected['Auto-Submitted'] = 'auto-generated'
 
     @actual = CommitMailer.create_diff(cs)
-    assert_equal(
-      normalize_revisions(@expected.encoded),
-      normalize_revisions(@actual.encoded))
+    assert_equal(normalize(@expected.encoded), normalize(@actual.encoded))
   end
 
 end

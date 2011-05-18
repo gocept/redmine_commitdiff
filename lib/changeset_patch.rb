@@ -23,7 +23,7 @@ module ChangesetPatch
     def recipients
       notified = project.notified_users
       notified.reject! {|user| !visible?(user)}
-      notified.collect(&:mail)
+      notified.map(&:mail)
     end
 
     def visible?(user=nil)

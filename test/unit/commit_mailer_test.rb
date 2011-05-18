@@ -45,7 +45,7 @@ class CommitMailerTest < ActionMailer::TestCase
     cs = @repos.latest_changeset
 
     @expected.date = cs.committed_on
-    @expected.from = cs.committer
+    @expected.from = 'Wolfgang Schnerring <ws@gocept.com>'
     @expected.subject = 'eCookbook - Multiple changes'
     @expected.body = read_fixture('basic_email')
     @expected['X-Redmine-Project'] = 'ecookbook'
@@ -55,6 +55,7 @@ class CommitMailerTest < ActionMailer::TestCase
     @expected['X-Redmine-Site'] = Setting.app_title
     @expected['Precedence'] = 'bulk'
     @expected['Auto-Submitted'] = 'auto-generated'
+    @expected['return-path'] = Setting.mail_from
 
     @actual = CommitMailer.create_diff(cs)
     assert_equal(normalize(@expected.encoded), normalize(@actual.encoded))

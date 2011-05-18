@@ -27,7 +27,7 @@ module ChangesetPatch
     end
 
     def visible?(user=nil)
-      (user || User.current).allowed_to?(:view_issues, self.project)
+      (user || User.current).allowed_to?(:view_changesets, self.project)
     end
 
     def diff

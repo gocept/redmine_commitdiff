@@ -61,4 +61,8 @@ class CommitMailerTest < ActionMailer::TestCase
     assert_equal(normalize(@expected.encoded), normalize(@actual.encoded))
   end
 
+  def test_comitter_is_not_notified_of_own_change_if_configured
+    # XXX no idea how to set this up so that it tests something interesting
+  end
+
 end

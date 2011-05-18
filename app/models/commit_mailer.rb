@@ -18,6 +18,7 @@ class CommitMailer < Mailer
     recipients changeset.recipients
     sent_on changeset.committed_on
     from changeset.committer
+    @author = changeset.user
     body :cs => changeset
   end
 

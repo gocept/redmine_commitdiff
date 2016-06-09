@@ -7,4 +7,4 @@ into your post-commit hooks)
 == Installation
 
 cd $REDMINE_HOME/vendor/plugins
-hg clone https://code.gocept.com/hg/public/redmine_commitdiff
+hg clone https://bitbucket.org/gocept/redmine_commitdiff
